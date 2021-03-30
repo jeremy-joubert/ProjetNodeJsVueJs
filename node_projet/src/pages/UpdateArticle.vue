@@ -22,18 +22,21 @@ export default {
   name: 'UpdateArticle',
   data () {
     return {
-      titreOld: '',
       article: [],
       erreur: ''
     }
   },
   async created () {
-    this.titreOld = this.$route.params.titre
-    this.article = {titre: this.$route.params.titre, contenue: this.$route.params.contenue, auteur: this.$route.params.auteur}
+    this.article = {
+      _id: this.$route.params._id,
+      titre: this.$route.params.titre,
+      contenue: this.$route.params.contenue,
+      auteur: this.$route.params.auteur
+    }
   },
   methods: {
     modifier () {
-      const json = JSON.stringify({titreOld: this.titreOld, titre: this.article.titre, contenue: this.article.contenue})
+      const json = JSON.stringify({_id: this.article._id, titre: this.article.titre, contenue: this.article.contenue})
       axios.post('http://localhost:3000/update', json, {headers: {'Content-Type': 'application/json'}})
       this.$router.push('/')
     }

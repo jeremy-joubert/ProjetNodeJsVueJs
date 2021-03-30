@@ -62,30 +62,25 @@ app.post('/new',  function (req, res) {
     res.json(newArticle);
 });
 app.post('/update', async function (req, res) {
-    let articleUpdate=req.body
-    console.log(articleUpdate)
-    await article.findArticleByTitre(articleUpdate.titreOld).then( async function (response) {
-        await article.updateArticle(articleUpdate.titre, articleUpdate.contenue,response.data[0]._id)
-            .then((response) => {
-                res.json(response)
-            })
-            .catch((err) => {
-                res.status(401).json({ error: err })
-            })
-    })
+    let articleUpdate = req.body
+    await article.updateArticle(articleUpdate.titre, articleUpdate.contenue, articleUpdate._id)
+        .then((response) => {
+            res.json(response)
+        })
+        .catch((err) => {
+            res.status(401).json({error: err})
+        })
 });
 app.post('/delete', async function (req, res) {
     let articleDelete=req.body
     console.log(articleDelete)
-    await article.findArticleByTitre(articleDelete.titre).then( async function (response) {
-        await article.deleteArticle(response.data[0]._id)
-            .then((response) => {
-                res.json(response)
-            })
-            .catch((err) => {
-                res.status(401).json({ error: err })
-            })
-    })
+    await article.deleteArticle(articleDelete._id)
+        .then((response) => {
+            res.json(response)
+        })
+        .catch((err) => {
+            res.status(401).json({error: err})
+        })
 });
 app.post('/compte/inscription', function (req, res) {
     let user=req.body

@@ -4,11 +4,8 @@
       <CardArticle
         v-for="article in articles"
         v-bind:key="article"
-        v-bind:titre="article.titre"
-        v-bind:contenu="article.contenue"
-        v-bind:img="article.image"
-        v-bind:auteur="article.auteur"
-        v-bind:auteur-connecter="auteurConnecter"/>
+        v-bind:auteur-connecter="auteurConnecter"
+        v-bind:article="article"/>
     </div>
   </div>
 </template>
